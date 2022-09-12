@@ -1,5 +1,14 @@
 .App {
   text-align: center;
+  margin-top: 200px;
+}
+.borderSec {
+  margin-top: 200px;
+  display: inline; /* the default for span */
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid black;
 }
 
 .App-logo {
