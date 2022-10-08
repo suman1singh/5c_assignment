@@ -4,7 +4,7 @@
 }
 .borderSec {
   margin-top: 200px;
-  display: inline; /* the default for span */
+  display: inline;
   width: 100px;
   height: 100px;
   padding: 10px;

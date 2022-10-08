@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function App() {
   const navigate = useNavigate();
-  const [data, setData1] = useState();
+  const [data1, setdata1] = useState();
   function onSubmitHandler(e) {
-    console.log(data);
     e.preventDefault();
-    navigate(`/user/${data}`, { state: { gitname: data } });
+    navigate(`/user/${data1}`, { state: { gitname: data1 } });
   }
   return (
     <div className="App">
@@ -16,9 +15,8 @@ export default function App() {
         <input
           type="text"
           placeholder="Please enter userName"
-          onChange={(e) => setData1(e.target.value)}
+          onChange={(e) => setdata1(e.target.value)}
         />{" "}
-        <span>Include forks:</span> <input type="checkbox" />{" "}
         <button type="submit">Submit</button>
       </form>
     </div>

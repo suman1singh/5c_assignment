@@ -1,14 +1,15 @@
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import "./User.css";
 
 export default function App63() {
   const [data, setData] = useState();
   const loc = useLocation();
   var gitId = loc.state.gitname;
+  const navigateTo = useNavigate();
 
   useEffect(() => {
-    console.log("Avail data", gitId);
     axios.get(`https://api.github.com/users/${gitId}/repos`).then((resp) => {
       setData(resp.data);
     });
@@ -16,25 +17,44 @@ export default function App63() {
 
   return (
     <div>
-      <table border="1">
-        <tbody>
-          <tr>
-            <td>Name</td>
-            <td>Language</td>
-            <td>Description</td>
-            <td>Size</td>
-          </tr>
-          {data &&
-            data.map((key, ind) => (
-              <tr>
-                <td>{key.name}</td>
-                <td>{key.language}</td>
-                <td>{key.description}</td>
-                <td>{key.size}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <button
+        style={{ marginLeft: "30px", marginTop: "30px", marginBottom: "30px" }}
+        onClick={() => navigateTo("/")}
+      >
+        Go back
+      </button>
+      <button
+        style={{ float:'right', marginTop:'30px', marginRight:'20px' }}
+        onClick={() => navigateTo("/edituser")}
+      >
+        Current User
+      </button>
+      {data &&
+        data.map((val, i) => (
+          <div key={i}>
+            <span>
+              <img
+                className="head-Img"
+                src={val.owner.avatar_url}
+                alt="heading-img"
+              />
+            </span>
+            <div style={{ width: "90%", margin: "auto", marginTop: "-25px" }}>
+              <a>
+                <button className="repo-link">{val.description}</button>
+              </a>
+              <span>
+                <img
+                  style={{ height: "20px", width: "20px" }}
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Eo_circle_green_checkmark.svg/2048px-Eo_circle_green_checkmark.svg.png"
+                  alt="repo-tick"
+                />
+              </span>
+              <p>{val.full_name}</p>
+            </div>
+            <hr />
+          </div>
+        ))}
     </div>
   );
 }
